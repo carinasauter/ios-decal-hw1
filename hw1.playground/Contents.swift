@@ -22,11 +22,11 @@ class Words {
 //: ### variables the same type? If not, why?
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
+//: No, they are not because the variables wordA and wordB are strings while the values in the init function are optionals. Optionals are a separate type in Swift. In the init function, the optionals have an associated value of string but they are not unwrapped so their type is optional. In the variable, the optional is unwrapped, making the associated value the variable's type (string in this case).
 
 
 //: ## Q2: Variable Types and Function Types
-    func arePalindromes(_ words: [String]) -> Bool {
+    class func arePalindromes(_ words: [String]) -> Bool {
         let reversedWords = words.map() {String($0.characters.reversed())}
         let numElements = words.count
         
@@ -35,20 +35,21 @@ class Words {
                 return false
             }
         }
+    return true
     }
 //: ### Why does the compiler dislike the **for loop**? Fix it.
 //: ### What else is wrong with this function? You may have to refer to (but **not**
 //: ### change) the code at the very bottom. Debug the function.
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
-
+//: One of the problems was that you can only call an instance method with an instance of a class so the 'class' had to be added in front of the func arePalindromes. Also, the function had not been complete yet since it would never have returned true (so that was added in the end as well).
+    
 
 //: ## Q3: More Functions and Object Initialization
-    class func isAnagram() -> Bool {
-        var countLetters : [Character : Int] //Line X
-        var lenA = self.wordA.characters.count
-        var lenB = self.wordB.characters.count
+        func isAnagram() -> Bool {
+        var countLetters : [Character : Int] = [Character : Int]() //Line X
+        let lenA = self.wordA.characters.count
+        let lenB = self.wordB.characters.count
         
         if lenA != lenB {
             return false
@@ -75,13 +76,13 @@ class Words {
             }
         }
         
-        for (letter, count) in countLetters {
+        for (_, count) in countLetters {
             if count != 0 {
                 return false
             }
         }
         
-        return nil
+        return true
     }
 //: ### What is the problem with declaring **countLetters** as we do in **Line X**,
 //: ### and then using it in **Line Y**? Fix it (by only changing **Line X**).
@@ -89,7 +90,7 @@ class Words {
 //: ### change) the code at the very bottom. Debug the function.
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
+//: The dictionary **countLetters** did not have the proper syntax for initialization - had to add '= [Character : Int]()'. Also, since variables lenA and lenB never changed, they were changed to let (constants). Also, letter in (letter, count) could be removed since it was not necessary to do the for loop. At the end of the function, the return value was changed to true if the words passed all the anagram tests. It was not reasonable to have a 'return nil' there.
     
     
 }
